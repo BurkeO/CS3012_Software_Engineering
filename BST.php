@@ -13,39 +13,39 @@ include("Node.php");
 
      function insert($newValue)
      {
-       $this->Root = insertRecurs($this->Root, $newValue);
+       $this->Root = $this->insertRecurs($this->Root, $newValue);
      }
 
-     function insertRecurs($Root, $newValue)
+     function insertRecurs($node, $newValue)
      {
-       if ($Root == NULL)
+       if ($node == NULL)
        {
-         $Root = new Node($newValue);
-         return $Root;
+         $node = new Node($newValue);
+         return $node;
        }
-       if ($newValue < $Root->value)
+       if ($newValue < $node->value)
        {
-         $Root->left = insertRecurs($Root->left, $newValue);
+         $node->left = $this->insertRecurs($node->left, $newValue);
        }
-       else if ($newValue > $Root->value)
+       else if ($newValue > $node->value)
        {
-         $Root->right = insertRecurs($Root->right, $newValue);
+         $node->right = $this->insertRecurs($node->right, $newValue);
        }
-       return $Root;
+       return $node;
      }
 
      function printInOrder()
      {
-       printInOrderRecurs($this->Root);
+       $this->printInOrderRecurs($this->Root);
      }
 
      function printInOrderRecurs($Root)
      {
        if ($Root != NULL)
        {
-         printInOrderRecurs($Root->left);
-         print("$Root\n");
-         printInOrderRecurs($Root->right);
+         $this->printInOrderRecurs($Root->left);
+         print("$Root->value\n");
+         $this->printInOrderRecurs($Root->right);
        }
      }
 
