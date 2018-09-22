@@ -34,18 +34,20 @@ include("Node.php");
        return $node;
      }
 
-     function printInOrder()
+     function arrayInOrder()
      {
-       $this->printInOrderRecurs($this->Root);
+       $treeTrav = array();
+       $this->arrayInOrderRecurs($this->Root, $treeTrav);
+       return $treeTrav;
      }
 
-     function printInOrderRecurs($Root)
+     function arrayInOrderRecurs($Root, &$treeTrav)
      {
        if ($Root != NULL)
        {
-         $this->printInOrderRecurs($Root->left);
-         print("$Root->value\n");
-         $this->printInOrderRecurs($Root->right);
+         $this->arrayInOrderRecurs($Root->left, $treeTrav);
+         array_push($treeTrav, $Root->value);
+         $this->arrayInOrderRecurs($Root->right, $treeTrav);
        }
      }
 

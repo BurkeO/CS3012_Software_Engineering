@@ -15,7 +15,9 @@ include("BST.php");
        $Tree->insert(60);
        $Tree->insert(80);
 
-       $Tree->printInOrder();
-      /*}
+       $temp = $Tree->arrayInOrder();
+       $temp = implode("\n", $temp);
+       echo $temp;
+     /*}
    }*/
 ?>

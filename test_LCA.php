@@ -1,6 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
-include("Node.php");
+//include("Node.php");
+include("BST.php");
 
 class LCA_Test extends TestCase
 {
@@ -22,6 +23,21 @@ class LCA_Test extends TestCase
         $testNode->left = $newLeftNode;
         $this->assertEquals(15, $testNode->left->value);
         $this->assertEquals($newLeftNode, $testNode->left); //Testing overwrite of child node
+    }
+
+    public function testBstClass()
+    {
+      $Tree = new BST();
+      $Tree->insert(50);
+      $Tree->insert(30);
+      $Tree->insert(20);
+      $Tree->insert(40);
+      $Tree->insert(70);
+      $Tree->insert(60);
+      $Tree->insert(80);
+
+      //$Tree->arrayInOrder();
+      $this->assertEquals("20\n30\n40\n50\n60\n70\n80", implode("\n", $Tree->arrayInOrder()));
     }
 }
 ?>
