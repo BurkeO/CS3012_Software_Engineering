@@ -6,17 +6,17 @@ include("Node.php");
    {
      var $Root;
 
-     function __construct()
+     function __construct() //Creates root of binary tree.
      {
        $this->Root = NULL;
      }
 
-     function insert($newValue)
+     function insert($newValue) //Insert new value to tree. Recursively travels down tree in insertRecurs.
      {
        $this->Root = $this->insertRecurs($this->Root, $newValue);
      }
 
-     function insertRecurs($node, $newValue)
+     private function insertRecurs($node, $newValue)  //Travels down tree to find position to insert new value.
      {
        if ($node == NULL)
        {
@@ -34,21 +34,58 @@ include("Node.php");
        return $node;
      }
 
-     function arrayInOrder()
+     function arrayInOrder()  //Returns an array of nodes that represent the tree in InOrder traversal.
      {
        $treeTrav = array();
        $this->arrayInOrderRecurs($this->Root, $treeTrav);
        return $treeTrav;
      }
 
-     function arrayInOrderRecurs($Root, &$treeTrav)
+     private function arrayInOrderRecurs($node, &$treeTrav) //Recursively traverses tree InOrder.
      {
-       if ($Root != NULL)
+       if ($node != NULL)
        {
-         $this->arrayInOrderRecurs($Root->left, $treeTrav);
-         array_push($treeTrav, $Root->value);
-         $this->arrayInOrderRecurs($Root->right, $treeTrav);
+         $this->arrayInOrderRecurs($node->left, $treeTrav);
+         array_push($treeTrav, $node->value);
+         $this->arrayInOrderRecurs($node->right, $treeTrav);
        }
+     }
+
+     function search($value)  //Returns the node that matches the value the caller wishes to find in the tree.
+     {
+       $desiredNode = $this->searchRecurs($this->Root, $value);
+       return $desiredNode;
+     }
+
+     private function searchRecurs($node, $value) //Travels down tree comparing values in nodes to find the desired node. Returns NULL if not found.
+     {                                      //Else returns the node that matches the desired value.
+       if ($node->value == $value)
+       {
+         return $node;
+       }
+       if ($value < $node->value)
+       {
+         if ($node->left == NULL)
+         {
+           return NULL;
+         }
+         return $this->searchRecurs($node->left, $value);
+       }
+       else if ($value > $node->value)
+       {
+         if ($node->right == NULL)
+         {
+           return NULL;
+         }
+         return $this->searchRecurs($node->right, $value);
+       }
+     }
+
+
+
+     function getLCA()
+     {
+
      }
 
 

@@ -51,7 +51,28 @@ class LCA_Test extends TestCase
       $Tree->insert(10);
       $Tree->insert(-10);
       $Tree->insert(-5);
-      $this->assertEquals("-10\n-5\n10", implode("\n", $Tree->arrayInOrder()));
+      $this->assertEquals("-10\n-5\n10", implode("\n", $Tree->arrayInOrder())); //Tests tree with negative nodes and addition of already present nodes.
+    }
+
+    public function testBstSearch() //Tests the search method to return the node that matches the value the caller provides.
+    {                               //If not found returns NULL.
+      $Tree = new BST();
+      $Tree->insert(50);
+      $Tree->insert(30);
+      $Tree->insert(20);
+      $Tree->insert(40);
+      $Tree->insert(70);
+      $Tree->insert(60);
+      $Tree->insert(80);
+      $this->assertEquals(20, ($Tree->search(20))->value);
+
+      $this->assertEquals(30, ($Tree->search(30))->value);
+
+      $this->assertEquals(80, ($Tree->search(80))->value);
+
+      $this->assertEquals(NULL, $Tree->search(-10));
+
+      $this->assertEquals(NULL, $Tree->search(90));
     }
 }
 ?>
