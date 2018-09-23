@@ -81,13 +81,32 @@ include("Node.php");
        }
      }
 
-
-
-     function getLCA()
-     {
-
+     function getLCA($valOne, $valTwo)  //Returns the LCA (lowest common ancestor) in the tree for the two values provided.
+     {                                  //LCA = The deepest node that has X and Y as descendants (a node can be a descendant of itself).
+       if (($this->search($valOne)) == NULL || ($this->search($valTwo)) == NULL)
+       {
+         return NULL;
+       }
+       else
+       {
+         return $this->getLCA_Recurs($this->Root, $valOne, $valTwo);
+       }
      }
 
-
+     private function getLCA_Recurs($node, $valOne, $valTwo) //LCA = the node at which the paths diverge (including if one path stops).
+     {
+       if ($node->value > $valOne && $node->value > $valTwo)
+       {
+         return $this->getLCA_Recurs($node->left, $valOne, $valTwo);
+       }
+       else if ($node->value < $valOne && $node->value < $valTwo)
+       {
+         return $this->getLCA_Recurs($node->right, $valOne, $valTwo);
+       }
+       else
+       {
+         return $node;
+       }
+     }
    }
 ?>

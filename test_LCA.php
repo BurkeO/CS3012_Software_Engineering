@@ -74,5 +74,33 @@ class LCA_Test extends TestCase
 
       $this->assertEquals(NULL, $Tree->search(90));
     }
+
+    public function testBstLCA()  //Tests the LCA (lowest common ancestor) function in the BST class.
+    {                             //LCA = The deepest node that has X and Y as descendants (a node can be a descendant of itself).
+      $Tree = new BST();
+      $Tree->insert(50);
+      $Tree->insert(30);
+      $Tree->insert(20);
+      $Tree->insert(40);
+      $Tree->insert(70);
+      $Tree->insert(60);
+      $Tree->insert(80);
+
+      $this->assertEquals(NULL, $Tree->getLCA(-10, 30));
+
+      $this->assertEquals(NULL, $Tree->getLCA(20, 35));
+
+      $this->assertEquals(30, ($Tree->getLCA(20, 40))->value);
+
+      $this->assertEquals(50, ($Tree->getLCA(20, 70))->value);
+
+      $this->assertEquals(70, ($Tree->getLCA(60, 80))->value);
+
+      $this->assertEquals(50, ($Tree->getLCA(70, 20))->value);
+
+      $this->assertEquals(30, ($Tree->getLCA(20, 30))->value);
+
+      $this->assertEquals(70, ($Tree->getLCA(70, 80))->value);
+    }
 }
 ?>
