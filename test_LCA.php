@@ -1,6 +1,5 @@
 <?php
 use PHPUnit\Framework\TestCase;
-//include("Node.php");
 include("BST.php");
 
 class LCA_Test extends TestCase
@@ -97,11 +96,11 @@ class LCA_Test extends TestCase
 
       $this->assertEquals(NULL, $Tree->getLCA(20, 35));
 
-      $this->assertEquals(NULL, $Tree->getLCA("Invalid", 35));  //Test LCA with invalid type
+      $this->assertEquals(NULL, $Tree->getLCA("Invalid", 35));  //Test LCA with invalid type.
 
-      $this->assertEquals(NULL, $Tree->getLCA(20, "Invalid")); //Test LCA with invalid type
+      $this->assertEquals(NULL, $Tree->getLCA(20, "Invalid")); //Test LCA with invalid type.
 
-      $this->assertEquals(NULL, $Tree->getLCA(89.456, 35)); //Test LCA with invalid type
+      $this->assertEquals(NULL, $Tree->getLCA(89.456, 35)); //Test LCA with invalid type.
 
       $this->assertEquals(30, ($Tree->getLCA(20, 40))->value);
 
@@ -116,7 +115,7 @@ class LCA_Test extends TestCase
       $this->assertEquals(70, ($Tree->getLCA(70, 80))->value);
     }
 
-    public function testEmptyTree()
+    public function testEmptyTree()   //Tests functions that would otherwise encounter an error for an empty tree.
     {
       $Tree = new BST();
       $this->assertEquals(NULL, $Tree->getLCA(-10, 30));
