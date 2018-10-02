@@ -13,6 +13,11 @@ include("Node.php");
 
      function insert($newValue) //Insert new value to tree. Recursively travels down tree in insertRecurs.
      {
+       if (is_int($newValue) == FALSE)
+       {
+         echo "Invalid type - must be int\n";
+         return;
+       }
        $this->Root = $this->insertRecurs($this->Root, $newValue);
      }
 
@@ -53,6 +58,15 @@ include("Node.php");
 
      function search($value)  //Returns the node that matches the value the caller wishes to find in the tree.
      {
+       if (is_int($value) == FALSE)
+       {
+         echo "Invalid type - must be int\n";
+         return NULL;
+       }
+       if ($this->Root == NULL)
+       {
+         return NULL;
+       }
        $desiredNode = $this->searchRecurs($this->Root, $value);
        return $desiredNode;
      }
@@ -83,6 +97,11 @@ include("Node.php");
 
      function getLCA($valOne, $valTwo)  //Returns the LCA (lowest common ancestor) in the tree for the two values provided.
      {                                  //LCA = The deepest node that has X and Y as descendants (a node can be a descendant of itself).
+       if (is_int($valOne) == FALSE || is_int($valTwo) == FALSE)
+       {
+         echo "Invalid type - must be int\n";
+         return NULL;
+       }
        if (($this->search($valOne)) == NULL || ($this->search($valTwo)) == NULL)
        {
          return NULL;

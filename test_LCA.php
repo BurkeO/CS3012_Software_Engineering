@@ -30,6 +30,7 @@ class LCA_Test extends TestCase
       $Tree = new BST();
       $Tree->insert(50);
       $Tree->insert(30);
+      $Tree->insert("Invalid type"); //Testing insertion of invalid types - must be int.
       $Tree->insert(20);
       $Tree->insert(40);
       $Tree->insert(70);
@@ -42,6 +43,7 @@ class LCA_Test extends TestCase
       $Tree->insert(20);
       $Tree->insert(30);
       $Tree->insert(40);
+      $Tree->insert('c'); //Testing insertion of invalid types - must be int.
       $Tree->insert(50);
       $Tree->insert(60);
       $this->assertEquals("10\n20\n30\n40\n50\n60", implode("\n", $Tree->arrayInOrder())); //Tests tree with all nodes going to the right.
@@ -50,6 +52,7 @@ class LCA_Test extends TestCase
       $Tree->insert(-5);
       $Tree->insert(10);
       $Tree->insert(-10);
+      $Tree->insert(56.789); //Testing insertion of invalid types - must be int.
       $Tree->insert(-5);
       $this->assertEquals("-10\n-5\n10", implode("\n", $Tree->arrayInOrder())); //Tests tree with negative nodes and addition of already present nodes.
     }
@@ -65,6 +68,10 @@ class LCA_Test extends TestCase
       $Tree->insert(60);
       $Tree->insert(80);
       $this->assertEquals(20, ($Tree->search(20))->value);
+
+      $this->assertEquals(NULL, $Tree->search("Invalid type")); //Testing search for invalid types - must be int.
+
+      $this->assertEquals(NULL, $Tree->search(87.456)); //Testing search for invalid types - must be int.
 
       $this->assertEquals(30, ($Tree->search(30))->value);
 
@@ -90,6 +97,12 @@ class LCA_Test extends TestCase
 
       $this->assertEquals(NULL, $Tree->getLCA(20, 35));
 
+      $this->assertEquals(NULL, $Tree->getLCA("Invalid", 35));  //Test LCA with invalid type
+
+      $this->assertEquals(NULL, $Tree->getLCA(20, "Invalid")); //Test LCA with invalid type
+
+      $this->assertEquals(NULL, $Tree->getLCA(89.456, 35)); //Test LCA with invalid type
+
       $this->assertEquals(30, ($Tree->getLCA(20, 40))->value);
 
       $this->assertEquals(50, ($Tree->getLCA(20, 70))->value);
@@ -101,6 +114,14 @@ class LCA_Test extends TestCase
       $this->assertEquals(30, ($Tree->getLCA(20, 30))->value);
 
       $this->assertEquals(70, ($Tree->getLCA(70, 80))->value);
+    }
+
+    public function testEmptyTree()
+    {
+      $Tree = new BST();
+      $this->assertEquals(NULL, $Tree->getLCA(-10, 30));
+
+      $this->assertEquals(NULL, $Tree->search(10));
     }
 }
 ?>
