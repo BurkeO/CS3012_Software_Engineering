@@ -6,23 +6,102 @@
   class Dag
   {
 
-    $NodeList;
+    var $nodeList;
 
     function __construct()
     {
-      $NodeList = array();
+      $this->nodeList = array();
     }
 
     function toString()
     {
-      for ($i = 0; $i < sizeof($this->NodeList); $i++)
+      for ($i = 0; $i < sizeof($this->nodeList); $i++)
       {
-        $this->NodeList[$i]->printNode();
+        $this->nodeList[$i]->printNode();
+        echo "\n";
+      }
+    }
+
+    function addNode($key, $value)
+    {
+      for($i = 0; $i < sizeof($this->nodeList); $i++)
+      {
+        if ($this->nodeList[$i]->key == $key)
+        {
+          $this->nodeList[$i]->setValue($value);
+          return;
+        }
+      }
+      $newNode = new DagNode($key, $value);
+      array_push($this->nodeList, $newNode);
+    }
+
+    function addEdge($fromKey, $toKey)
+    {
+      for ($i = 0; $i < sizeof($this->nodeList); $i++)
+      {
+        if ($this->nodeList[$i]->key == $fromKey)
+        {
+          for ($j = 0; $j < sizeOf($this->nodeList); $j++)
+          {
+
+            if($this->nodeList[$j]->key == $toKey && $this->nodeList[$j]->isConnectedTo($fromKey) == FALSE)
+            {
+              //ispathfrom tokey to $fromKey
+              $this->nodeList[$i]->pointTo($this->nodeList[$j]);
+              break;
+            }
+
+            if($this->nodeList[$j]->key == $toKey && $this->nodeList[$j]->isConnectedTo($fromKey) == TRUE)
+            {
+              echo "Will create a cycle from \"$fromKey\" to \"$toKey\" - Edge not added\n\n";
+            }
+
+          }
+          break;
+        }
       }
     }
 
 
   }
+
+  /*$newNode = new DagNode("One", 1);
+  $tempNode1 = new DagNode("Two", 2);
+  $tempNode2 = new DagNode("Three", 3);
+  $newNode->pointTo($tempNode1);
+  $tempNode1->pointTo($tempNode2);
+
+  $newNode->printNode();
+
+  echo "\n\n";
+
+  $isCon = $newNode->isConnectedTo("Two");
+  print($isCon."\n");
+  $isCon = $newNode->isConnectedTo("Three");
+  print($isCon."\n");
+  $isCon = $newNode->isConnectedTo("Four");
+  print($isCon."\n");
+
+  echo "\n\n";*/
+
+  $graph = new DAG();
+  $graph->addNode("One", 1);
+  $graph->addNode("Two", 2);
+  $graph->addNode("Three", 3);
+
+  $graph->addEdge("One", "Two");
+  $graph->addEdge("Two", "Three");
+
+  $graph->addEdge("Three", "One");
+
+  $graph->addEdge("One","Three");
+
+  $graph->addEdge("Three","Three");
+  $graph->addEdge("Three", "Two");
+
+
+  $graph->toString();
 
 
 ?>

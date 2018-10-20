@@ -24,10 +24,10 @@
 
      function printNode()
      {
-       print("Key = $this->key Value = $this->value\n");
+       print("Key = \"$this->key\" Value = $this->value\n");
        for ($i = 0; $i < sizeof($this->AdjNodes); $i++)
        {
-         print("Adj Key = ".$this->AdjNodes[$i]->key." Val = ".$this->AdjNodes[$i]->value."\n");
+         print("Adj : Key = \"".$this->AdjNodes[$i]->key."\" | Val = ".$this->AdjNodes[$i]->value."\n");
        }
      }
 
@@ -46,7 +46,7 @@
      }
    }
 
-   $newNode = new DagNode("One", 1);
+   /*$newNode = new DagNode("One", 1);
    $tempNode1 = new DagNode("Two", 2);
    $tempNode2 = new DagNode("Three", 3);
    $newNode->pointTo($tempNode1);
@@ -61,7 +61,7 @@
    $isCon = $newNode->isConnectedTo("Three");
    print($isCon."\n");
    $isCon = $newNode->isConnectedTo("Four");
-   print($isCon."\n");
+   print($isCon."\n");*/
 
 
 
