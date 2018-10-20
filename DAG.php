@@ -85,7 +85,7 @@
 
   echo "\n\n";*/
 
-  $graph = new DAG();
+  /*$graph = new DAG();
   $graph->addNode("One", 1);
   $graph->addNode("Two", 2);
   $graph->addNode("Three", 3);
@@ -101,7 +101,7 @@
   $graph->addEdge("Three", "Two");
 
 
-  $graph->toString();
+  $graph->toString();*/
 
 
 ?>

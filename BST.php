@@ -15,7 +15,7 @@ include("Node.php");
      {
        if (is_int($newValue) == FALSE)
        {
-         echo "Invalid type - must be int\n";
+         //echo "Invalid type - must be int\n";
          return;
        }
        $this->Root = $this->insertRecurs($this->Root, $newValue);
@@ -60,7 +60,7 @@ include("Node.php");
      {
        if (is_int($value) == FALSE)
        {
-         echo "Invalid type - must be int\n";
+         //echo "Invalid type - must be int\n";
          return NULL;
        }
        if ($this->Root == NULL)
@@ -99,7 +99,7 @@ include("Node.php");
      {                                  //LCA = The deepest node that has X and Y as descendants (a node can be a descendant of itself).
        if (is_int($valOne) == FALSE || is_int($valTwo) == FALSE)
        {
-         echo "Invalid type - must be int\n";
+         //echo "Invalid type - must be int\n";
          return NULL;
        }
        if (($this->search($valOne)) == NULL || ($this->search($valTwo)) == NULL)

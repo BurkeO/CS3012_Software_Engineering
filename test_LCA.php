@@ -1,6 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 include("BST.php");
+include("DAG.php");
 
 class LCA_Test extends TestCase
 {
@@ -121,6 +122,32 @@ class LCA_Test extends TestCase
       $this->assertEquals(NULL, $Tree->getLCA(-10, 30));
 
       $this->assertEquals(NULL, $Tree->search(10));
+    }
+
+    /***************************************TESTS FOR DIRECTED ACYCLIC GRAPH****************************/
+
+    public function testDAGNodeClass()
+    {
+      $newNode = new DagNode("One", 1);
+
+      $this->assertEquals("One", $newNode->key);
+      $this->assertEquals(1, $newNode->value);
+
+      $tempNode1 = new DagNode("Two", 2);
+      $tempNode2 = new DagNode("Three", 3);
+      $newNode->pointTo($tempNode1);
+      $tempNode1->pointTo($tempNode2);
+
+      $testArray = array($tempNode1);
+      $this->assertEquals($testArray, $newNode->adjNodes);
+
+      $newNode->setValue(100);
+      $this->assertEquals(100, $newNode->value);
+
+      $this->assertEquals(TRUE, $newNode->isConnectedTo("Two"));
+      $this->assertEquals(TRUE, $newNode->isConnectedTo("Three"));
+      $this->assertEquals(FALSE, $tempNode2->isConnectedTo("One"));
+
     }
 }
 ?>

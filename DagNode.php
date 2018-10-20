@@ -3,18 +3,18 @@
    {
      var $key;
      var $value;
-     var $AdjNodes;
+     var $adjNodes;
 
      function __construct($key, $value)
      {
        $this->key = $key;
        $this->value = $value;
-       $this->AdjNodes = array();
+       $this->adjNodes = array();
      }
 
      function pointTo($dagNode)
      {
-       array_push($this->AdjNodes, $dagNode);
+       array_push($this->adjNodes, $dagNode);
      }
 
      function setValue($newValue)
@@ -25,9 +25,9 @@
      function printNode()
      {
        print("Key = \"$this->key\" Value = $this->value\n");
-       for ($i = 0; $i < sizeof($this->AdjNodes); $i++)
+       for ($i = 0; $i < sizeof($this->adjNodes); $i++)
        {
-         print("Adj : Key = \"".$this->AdjNodes[$i]->key."\" | Val = ".$this->AdjNodes[$i]->value."\n");
+         print("Adj : Key = \"".$this->adjNodes[$i]->key."\" | Val = ".$this->adjNodes[$i]->value."\n");
        }
      }
 
@@ -37,9 +37,9 @@
        {
          return TRUE;
        }
-       for ($i = 0; $i < sizeof($this->AdjNodes); $i++)
+       for ($i = 0; $i < sizeof($this->adjNodes); $i++)
        {
-         if($this->AdjNodes[$i]->isConnectedTo($key) == TRUE)
+         if($this->adjNodes[$i]->isConnectedTo($key) == TRUE)
           return TRUE;
        }
        return FALSE;
