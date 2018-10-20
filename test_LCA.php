@@ -126,11 +126,11 @@ class LCA_Test extends TestCase
 
     /***************************************TESTS FOR DIRECTED ACYCLIC GRAPH****************************/
 
-    public function testDAGNodeClass()
+    public function testDAGNodeClass() //tests DagNode construction and its functions.
     {
       $newNode = new DagNode("One", 1);
 
-      $this->assertEquals("One", $newNode->key);
+      $this->assertEquals("One", $newNode->key);  //tests key and value fields.
       $this->assertEquals(1, $newNode->value);
 
       $tempNode1 = new DagNode("Two", 2);
@@ -139,14 +139,14 @@ class LCA_Test extends TestCase
       $tempNode1->pointTo($tempNode2);
 
       $testArray = array($tempNode1);
-      $this->assertEquals($testArray, $newNode->adjNodes);
+      $this->assertEquals($testArray, $newNode->adjNodes);  //tests the adding of adjacent nodes to a given node.
 
       $newNode->setValue(100);
-      $this->assertEquals(100, $newNode->value);
+      $this->assertEquals(100, $newNode->value);  //tests the setValue function.
 
-      $this->assertEquals(TRUE, $newNode->isConnectedTo("Two"));
-      $this->assertEquals(TRUE, $newNode->isConnectedTo("Three"));
-      $this->assertEquals(FALSE, $tempNode2->isConnectedTo("One"));
+      $this->assertEquals(TRUE, $newNode->isConnectedTo("Two"));  //tests the recursive function to check if nodes are connected.
+      $this->assertEquals(TRUE, $newNode->isConnectedTo("Three"));  //this function is needed later in order to prevent the creation
+      $this->assertEquals(FALSE, $tempNode2->isConnectedTo("One")); //of cycles.
 
     }
 }

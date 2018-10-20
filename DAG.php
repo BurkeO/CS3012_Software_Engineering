@@ -13,7 +13,7 @@
       $this->nodeList = array();
     }
 
-    function toString()
+    function toString() //prints each node in the graph and shows their adjacent nodes.
     {
       for ($i = 0; $i < sizeof($this->nodeList); $i++)
       {
@@ -22,7 +22,7 @@
       }
     }
 
-    function addNode($key, $value)
+    function addNode($key, $value) //adds a node to the graph node list, if there doesn't exist a node with the passed key already.
     {
       for($i = 0; $i < sizeof($this->nodeList); $i++)
       {
@@ -36,8 +36,8 @@
       array_push($this->nodeList, $newNode);
     }
 
-    function addEdge($fromKey, $toKey)
-    {
+    function addEdge($fromKey, $toKey)  //adds the corresponding node with the toKey to the adjacency list of the node with the
+    {                                   //fromKey, representing an edge.
       for ($i = 0; $i < sizeof($this->nodeList); $i++)
       {
         if ($this->nodeList[$i]->key == $fromKey)
