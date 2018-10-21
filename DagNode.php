@@ -45,29 +45,4 @@
        return FALSE;
      }
    }
-
-   /*$newNode = new DagNode("One", 1);
-   $tempNode1 = new DagNode("Two", 2);
-   $tempNode2 = new DagNode("Three", 3);
-   $newNode->pointTo($tempNode1);
-   $newNode->pointTo($tempNode2);
-
-   $newNode->printNode();
-
-   echo "\n\n";
-
-   $isCon = $newNode->isConnectedTo("Two");
-   print($isCon."\n");
-   $isCon = $newNode->isConnectedTo("Three");
-   print($isCon."\n");
-   $isCon = $newNode->isConnectedTo("Four");
-   print($isCon."\n");*/
-
-
-
-
-
-
-
-
 ?>

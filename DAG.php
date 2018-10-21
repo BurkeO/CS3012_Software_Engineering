@@ -5,7 +5,6 @@
 
   class Dag
   {
-
     var $nodeList;
 
     function __construct()
@@ -44,64 +43,74 @@
         {
           for ($j = 0; $j < sizeOf($this->nodeList); $j++)
           {
-
             if($this->nodeList[$j]->key == $toKey && $this->nodeList[$j]->isConnectedTo($fromKey) == FALSE)
             {
-              //ispathfrom tokey to $fromKey
               $this->nodeList[$i]->pointTo($this->nodeList[$j]);
               break;
             }
-
             /*if($this->nodeList[$j]->key == $toKey && $this->nodeList[$j]->isConnectedTo($fromKey) == TRUE)
             {
               echo "Will create a cycle from \"$fromKey\" to \"$toKey\" - Edge not added\n\n";
             }*/
-
           }
           break;
         }
       }
     }
 
+    function getLCA($keyOne, $keyTwo)
+    {
+      for($i = 0; $i < sizeof($this->nodeList); $i++)
+      {
+        if($this->nodeList[$i]->isConnectedTo($keyOne) && $this->nodeList[$i]->isConnectedTo($keyTwo))
+        {
+            return $this->getLCA_Recurs($this->nodeList[$i], $keyOne, $keyTwo);
+        }
+      }
+    }
+
+    private function getLCA_Recurs($node, $keyOne, $keyTwo)
+    {
+      for ($i = 0; $i < sizeof($node->adjNodes); $i++)
+      {
+        if($node->adjNodes[$i]->isConnectedTo($keyOne) && $node->adjNodes[$i]->isConnectedTo($keyTwo))
+        {
+          return $this->getLCA_Recurs($node->adjNodes[$i], $keyOne, $keyTwo);
+        }
+      }
+      return $node;
+    }
 
   }
-
-  /*$newNode = new DagNode("One", 1);
-  $tempNode1 = new DagNode("Two", 2);
-  $tempNode2 = new DagNode("Three", 3);
-  $newNode->pointTo($tempNode1);
-  $tempNode1->pointTo($tempNode2);
-
-  $newNode->printNode();
-
-  echo "\n\n";
-
-  $isCon = $newNode->isConnectedTo("Two");
-  print($isCon."\n");
-  $isCon = $newNode->isConnectedTo("Three");
-  print($isCon."\n");
-  $isCon = $newNode->isConnectedTo("Four");
-  print($isCon."\n");
-
-  echo "\n\n";*/
 
   /*$graph = new DAG();
   $graph->addNode("One", 1);
   $graph->addNode("Two", 2);
   $graph->addNode("Three", 3);
+  $graph->addNode("Four", 4);
+  $graph->addNode("Five", 5);
+  $graph->addNode("Six", 6);
+  $graph->addNode("Seven", 7);
 
   $graph->addEdge("One", "Two");
-  $graph->addEdge("Two", "Three");
+  $graph->addEdge("One", "Three");
 
-  $graph->addEdge("Three", "One");
+  $graph->addEdge("Two","Four");
+  $graph->addEdge("Two","Five");
 
-  $graph->addEdge("One","Three");
+  $graph->addEdge("Three","Six");
+  $graph->addEdge("Three","Seven");
 
-  $graph->addEdge("Three","Three");
-  $graph->addEdge("Three", "Two");
+  $result = $graph->getLCA("Four", "Five");
+  echo $result->key."\n";
 
+  $result = $graph->getLCA("Four", "Six");
+  echo $result->key."\n";
 
-  $graph->toString();*/
+  $result = $graph->getLCA("Three", "Four");
+  echo $result->key."\n";
 
+  $result = $graph->getLCA("Two", "Four");
+  echo $result->key."\n";*/
 
 ?>
