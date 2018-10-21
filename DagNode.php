@@ -22,14 +22,14 @@
        $this->value = $newValue;
      }
 
-     function printNode() //prints the information of a node and shows its adjacent nodes.
+     /*function printNode() //prints the information of a node and shows its adjacent nodes.
      {
        print("Key = \"$this->key\" Value = $this->value\n");
        for ($i = 0; $i < sizeof($this->adjNodes); $i++)
        {
          print("Adj : Key = \"".$this->adjNodes[$i]->key."\" | Val = ".$this->adjNodes[$i]->value."\n");
        }
-     }
+     }*/
 
      function isConnectedTo($key) //recursively goes through the adjacency array of a node's adjacent nodes to find a node with
      {                            //the passed key, in which case, a path exists between the two nodes.

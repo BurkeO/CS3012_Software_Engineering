@@ -147,7 +147,52 @@ class LCA_Test extends TestCase
       $this->assertEquals(TRUE, $newNode->isConnectedTo("Two"));  //tests the recursive function to check if nodes are connected.
       $this->assertEquals(TRUE, $newNode->isConnectedTo("Three"));  //this function is needed later in order to prevent the creation
       $this->assertEquals(FALSE, $tempNode2->isConnectedTo("One")); //of cycles.
+      $this->assertEquals(TRUE, $newNode->isConnectedTo("One"));
 
     }
+
+    public function testDAG_addNode() //tests the addition of nodes into the graph.
+    {
+      $graph = new DAG();
+      $graph->addNode("One", 1);
+      $graph->addNode("Two", 2);
+      $graph->addNode("Three", 3);
+      $this->assertEquals("One", $graph->nodeList[0]->key);
+      $this->assertEquals("Two", $graph->nodeList[1]->key);
+      $this->assertEquals("Three", $graph->nodeList[2]->key);
+
+      $this->assertEquals(2, $graph->nodeList[1]->value);
+      $graph->addNode("Two", 100);
+      $this->assertEquals(100, $graph->nodeList[1]->value); //tests that the value for the already existing node is overwritten.
+    }
+
+    public function testDAG_addEdge() //tests the creation of edges between nodes and that no cycles are created.
+    {
+      $graph = new DAG();
+      $graph->addNode("One", 1);
+      $graph->addNode("Two", 2);
+      $graph->addNode("Three", 3);
+
+      $graph->addEdge("One", "Two");
+      $graph->addEdge("Two", "Three");
+
+      $graph->addEdge("Three", "One"); //won't be added - will create cycle
+
+      $graph->addEdge("One","Three");
+
+      $graph->addEdge("Three","Three"); //won't be added - will create cycle
+      $graph->addEdge("Three", "Two"); //won't be added - will create cycle
+
+      $this->assertEquals(2,sizeof($graph->nodeList[0]->adjNodes));
+      $this->assertEquals("Two",$graph->nodeList[0]->adjNodes[0]->key);
+      $this->assertEquals("Three",$graph->nodeList[0]->adjNodes[1]->key);
+
+      $this->assertEquals(1,sizeof($graph->nodeList[1]->adjNodes));
+      $this->assertEquals("Three",$graph->nodeList[1]->adjNodes[0]->key);
+
+      $this->assertEquals(0,sizeof($graph->nodeList[2]->adjNodes));
+
+    }
+
 }
 ?>

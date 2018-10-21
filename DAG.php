@@ -13,14 +13,14 @@
       $this->nodeList = array();
     }
 
-    function toString() //prints each node in the graph and shows their adjacent nodes.
+    /*function toString() //prints each node in the graph and shows their adjacent nodes.
     {
       for ($i = 0; $i < sizeof($this->nodeList); $i++)
       {
         $this->nodeList[$i]->printNode();
         echo "\n";
       }
-    }
+    }*/
 
     function addNode($key, $value) //adds a node to the graph node list, if there doesn't exist a node with the passed key already.
     {
@@ -52,10 +52,10 @@
               break;
             }
 
-            if($this->nodeList[$j]->key == $toKey && $this->nodeList[$j]->isConnectedTo($fromKey) == TRUE)
+            /*if($this->nodeList[$j]->key == $toKey && $this->nodeList[$j]->isConnectedTo($fromKey) == TRUE)
             {
               echo "Will create a cycle from \"$fromKey\" to \"$toKey\" - Edge not added\n\n";
-            }
+            }*/
 
           }
           break;
