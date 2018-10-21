@@ -58,8 +58,8 @@
       }
     }
 
-    function getLCA($keyOne, $keyTwo)
-    {
+    function getLCA($keyOne, $keyTwo) //Returns the LCA (lowest common ancestor) in the graph for the two keys provided.
+    {                                 //LCA = The deepest node that has X and Y as descendants (a node can be a descendant of itself).
       for($i = 0; $i < sizeof($this->nodeList); $i++)
       {
         if($this->nodeList[$i]->isConnectedTo($keyOne) && $this->nodeList[$i]->isConnectedTo($keyTwo))
@@ -67,10 +67,11 @@
             return $this->getLCA_Recurs($this->nodeList[$i], $keyOne, $keyTwo);
         }
       }
+      return NULL;
     }
 
-    private function getLCA_Recurs($node, $keyOne, $keyTwo)
-    {
+    private function getLCA_Recurs($node, $keyOne, $keyTwo) //recursively goes through the adjacent nodes until a node is hit
+    {                                                       //where the path to the passed keys diverges.
       for ($i = 0; $i < sizeof($node->adjNodes); $i++)
       {
         if($node->adjNodes[$i]->isConnectedTo($keyOne) && $node->adjNodes[$i]->isConnectedTo($keyTwo))
@@ -82,35 +83,5 @@
     }
 
   }
-
-  /*$graph = new DAG();
-  $graph->addNode("One", 1);
-  $graph->addNode("Two", 2);
-  $graph->addNode("Three", 3);
-  $graph->addNode("Four", 4);
-  $graph->addNode("Five", 5);
-  $graph->addNode("Six", 6);
-  $graph->addNode("Seven", 7);
-
-  $graph->addEdge("One", "Two");
-  $graph->addEdge("One", "Three");
-
-  $graph->addEdge("Two","Four");
-  $graph->addEdge("Two","Five");
-
-  $graph->addEdge("Three","Six");
-  $graph->addEdge("Three","Seven");
-
-  $result = $graph->getLCA("Four", "Five");
-  echo $result->key."\n";
-
-  $result = $graph->getLCA("Four", "Six");
-  echo $result->key."\n";
-
-  $result = $graph->getLCA("Three", "Four");
-  echo $result->key."\n";
-
-  $result = $graph->getLCA("Two", "Four");
-  echo $result->key."\n";*/
 
 ?>

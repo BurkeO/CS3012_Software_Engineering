@@ -194,5 +194,79 @@ class LCA_Test extends TestCase
 
     }
 
+    public function testDAG_LCA() //Tests the LCA (lowest common ancestor) function in the DAG class.
+    {                             //LCA = The deepest node that has X and Y as descendants (a node can be a descendant of itself).
+      $graph = new DAG();
+      $graph->addNode("G", 1);
+      $graph->addNode("D", 2);
+      $graph->addNode("F", 3);
+      $graph->addNode("C", 4);
+      $graph->addNode("E", 5);
+      $graph->addNode("B", 6);
+      $graph->addNode("A", 7);
+
+      $graph->addEdge("G", "D");
+      $graph->addEdge("G", "F");
+
+      $graph->addEdge("D","C");
+      $graph->addEdge("F","E");
+
+      $graph->addEdge("C","B");
+      $graph->addEdge("E","B");
+
+      $graph->addEdge("B","A");
+
+      $result = $graph->getLCA("D", "F");
+      $this->assertEquals("G", $result->key);
+
+      $result = $graph->getLCA("E", "G");
+      $this->assertEquals("G", $result->key);
+
+      $result = $graph->getLCA("B", "F");
+      $this->assertEquals("F", $result->key);
+
+      $result = $graph->getLCA("C", "E");
+      $this->assertEquals("G", $result->key);
+
+      $graph = new DAG();  //The following tests represent a DAG in the form of a binary tree.
+      $graph->addNode("One", 1);
+      $graph->addNode("Two", 2);
+      $graph->addNode("Three", 3);
+      $graph->addNode("Four", 4);
+      $graph->addNode("Five", 5);
+      $graph->addNode("Six", 6);
+      $graph->addNode("Seven", 7);
+
+      $graph->addEdge("One", "Two");
+      $graph->addEdge("One", "Three");
+
+      $graph->addEdge("Two","Four");
+      $graph->addEdge("Two","Five");
+
+      $graph->addEdge("Three","Six");
+      $graph->addEdge("Three","Seven");
+
+      $result = $graph->getLCA("Four", "Five");
+      $this->assertEquals("Two", $result->key);
+
+      $result = $graph->getLCA("Four", "Six");
+      $this->assertEquals("One", $result->key);
+
+      $result = $graph->getLCA("Three", "Four");
+      $this->assertEquals("One", $result->key);
+
+      $result = $graph->getLCA("Two", "Four");
+      $this->assertEquals("Two", $result->key);
+
+      $result = $graph->getLCA("Six", "Seven");
+      $this->assertEquals("Three", $result->key);
+    }
+
+    public function testEmptyGraph()   //Tests functions that would otherwise encounter an error for an empty graph.
+    {
+      $graph = new DAG();
+      $this->assertEquals(NULL, $graph->getLCA("X","Y"));
+    }
+
 }
 ?>
